@@ -41,7 +41,7 @@ public class UserService {
 	public UserSignUpResponseDTO signupUser(UserRegistrationDTO userRegistrationDTO)
 	{
 		User user = new User();
-		if(findByEmail(userRegistrationDTO.getUsername())!=null)
+		if(findByEmail(userRegistrationDTO.getEmail())!=null)
 		{
 			return new UserSignUpResponseDTO(409, "Error", "User Already Existed with given email-address", null);
 		}
@@ -54,20 +54,20 @@ public class UserService {
 		return new UserSignUpResponseDTO(200, "Success", "User Created", signedUpUser);
 	}
 	
-	public ResponseEntity<UserLoginResponseDTO> loginUser(UserLoginDTO userLoginDTO) 
-	{
-		User user = findByEmail(userLoginDTO.getEmail());
-        
-        if (user != null && verifyPassword(userLoginDTO.getPassword(), user.getPassword())) {
-        	LoggedInUser loggedInUser = new LoggedInUser(user.getUsername(),user.getEmail());
-        	UserLoginResponseDTO userLoginResponseDTO= new UserLoginResponseDTO(200, "Success", "Login Successful", loggedInUser);
-        	return ResponseEntity.status(userLoginResponseDTO.getStatus_code()).body(userLoginResponseDTO);
-        } else {
-        	UserLoginResponseDTO userLoginResponseDTO= new UserLoginResponseDTO(200, "Error", "Invalid credentials", null);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(userLoginResponseDTO);
-        }
-		
-	}
+//	public ResponseEntity<UserLoginResponseDTO> loginUser(UserLoginDTO userLoginDTO)
+//	{
+//		User user = findByEmail(userLoginDTO.getEmail());
+//
+//        if (user != null && verifyPassword(userLoginDTO.getPassword(), user.getPassword())) {
+//        	LoggedInUser loggedInUser = new LoggedInUser(user.getUsername(),user.getEmail());
+//        	UserLoginResponseDTO userLoginResponseDTO= new UserLoginResponseDTO(200, "Success", "Login Successful", loggedInUser);
+//        	return ResponseEntity.status(userLoginResponseDTO.getStatus_code()).body(userLoginResponseDTO);
+//        } else {
+//        	UserLoginResponseDTO userLoginResponseDTO= new UserLoginResponseDTO(200, "Error", "Invalid credentials", null);
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(userLoginResponseDTO);
+//        }
+//
+//	}
 	
 	
 }

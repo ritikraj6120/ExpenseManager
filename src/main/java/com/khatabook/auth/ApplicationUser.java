@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class ApplicationUser implements UserDetails {
 
+    private final String email;
     private final String username;
     private final String password;
     private final ArrayList<? extends GrantedAuthority> grantedAuthorities;
@@ -16,13 +17,15 @@ public class ApplicationUser implements UserDetails {
     private final boolean isCredentialsNonExpired;
     private final boolean isEnabled;
 
-    public ApplicationUser(String username,
+    public ApplicationUser(String email,
+                           String username,
                            String password,
                            ArrayList<? extends GrantedAuthority> grantedAuthorities,
                            boolean isAccountNonExpired,
                            boolean isAccountNonLocked,
                            boolean isCredentialsNonExpired,
                            boolean isEnabled) {
+        this.email = email;
         this.username = username;
         this.password = password;
         this.grantedAuthorities = grantedAuthorities;
@@ -44,7 +47,15 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String getUsername() {
+        return email;
+    }
+
+    public String getRealUserName(){
         return username;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -65,5 +76,19 @@ public class ApplicationUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    @Override
+    public String toString() {
+        return "ApplicationUser{" +
+                "email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", grantedAuthorities=" + grantedAuthorities +
+                ", isAccountNonExpired=" + isAccountNonExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
+                ", isEnabled=" + isEnabled +
+                '}';
     }
 }

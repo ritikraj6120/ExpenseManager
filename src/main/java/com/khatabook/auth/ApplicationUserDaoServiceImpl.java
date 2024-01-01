@@ -20,6 +20,7 @@ public class ApplicationUserDaoServiceImpl implements ApplicationUserDao {
         	User user = optionalUser.get();
         	ApplicationUser applicationUser = new ApplicationUser(
                     user.getEmail(),
+                    user.getUsername(),
                     user.getPassword(),
                     new ArrayList<>(),
                     true,
@@ -31,9 +32,9 @@ public class ApplicationUserDaoServiceImpl implements ApplicationUserDao {
             return optionalApplicationUser;
         }
         else 
-        	{
+        {
         		return Optional.empty();
-        	}
+        }
     }
 
 }

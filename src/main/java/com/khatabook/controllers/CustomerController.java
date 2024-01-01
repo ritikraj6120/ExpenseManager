@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +29,6 @@ import com.khatabook.response.customertransaction.CustomCustomerTransactionRespo
 import com.khatabook.services.CustomerService;
 
 @RestController
-@Controller
 public class CustomerController {
 	
 	@Autowired
@@ -73,7 +71,7 @@ public class CustomerController {
 	
 	@PutMapping("/updatecustomer/{id}")
 	public ResponseEntity<CustomCustomerResponse> UpdateCustomer
-	(@PathVariable("id") UUID id, @Valid @RequestBody UpdateCustomerRequestDTO updateCustomerRequestDTO)
+	( @PathVariable("id") UUID id, @Valid @RequestBody UpdateCustomerRequestDTO updateCustomerRequestDTO)
 	{
 		try {
 			CustomCustomerResponse updatedCustomer = customerService.updateCustomer(id,updateCustomerRequestDTO);
